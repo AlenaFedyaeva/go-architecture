@@ -22,10 +22,6 @@ type Repository interface{
 	ListItems(filter *ItemFilter)([]*models.Item, error)
 }
 
-// func NewRepository() Repository{
-// 	return nil
-// }
-
 
 type mapDB struct{
 	mu         *sync.Mutex

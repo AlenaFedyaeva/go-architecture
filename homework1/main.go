@@ -15,15 +15,16 @@ func main() {
 		rep:repository.NewMapDB(),
 	}
 	router:= mux.NewRouter()
-	router.HandleFunc("item",handler.createItemHandler).Methods("POST")
-	router.HandleFunc("item",handler.listItemHandler).Methods("GET")
-	router.HandleFunc("item/{id}",handler.getItemHandler).Methods("GET")
-	router.HandleFunc("item/{id}",handler.deleteItemHandler).Methods("DELETE")
-	router.HandleFunc("item/{id}",handler.updateItemHandler).Methods("PUT")
+	router.HandleFunc("/hello",handler.hello).Methods("GET")
+	router.HandleFunc("/item",handler.createItemHandler).Methods("POST")
+	router.HandleFunc("/item",handler.listItemHandler).Methods("GET")
+	router.HandleFunc("/item/{id}",handler.getItemHandler).Methods("GET")
+	router.HandleFunc("/item/{id}",handler.deleteItemHandler).Methods("DELETE")
+	router.HandleFunc("/item/{id}",handler.updateItemHandler).Methods("PUT")
 	
 
 	srv:=&http.Server{
-		Addr: ":8080",
+		Addr: ":8085",
 		//Set timeouts to avoid Slowloris attacks
 		// WriteTimeout: time.Second*10,
 		// ReadTimeout: time.Second*15,

@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"go-architecture/homework1/models"
 	"go-architecture/homework1/repository"
 	"log"
@@ -13,6 +14,10 @@ import (
 
 type server struct {
 	rep repository.Repository
+}
+
+func(s *server) hello(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintf(w, "Hello World!")
 }
 
 func (s *server) createItemHandler(w http.ResponseWriter, r *http.Request) {
@@ -34,13 +39,24 @@ func (s *server) createItemHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) updateItemHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	idStr := vars["id"]
+
+	itemId, err := strconv.ParseInt(idStr, 10, 32)
+	if err != nil {
+		log.Println(err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
 	item := new(models.Item)
+	item.ID=int32(itemId)
 	if err := json.NewDecoder(r.Body).Decode(item); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 	// put item in db
-	item, err := s.rep.UpdateItem(item)
+	item, err = s.rep.UpdateItem(item)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
