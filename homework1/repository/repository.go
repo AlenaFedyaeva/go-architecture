@@ -2,28 +2,27 @@ package repository
 
 import (
 	"errors"
+	"fmt"
 	"go-architecture/homework1/models"
 	"sort"
 	"sync"
 	"time"
 )
 
-var(
+var (
 	ErrNotFound = errors.New("not found")
 )
 
-
 // Repository - intrface work with db
-type Repository interface{
-	CreateItem(item *models.Item)(*models.Item, error)
-	UpdateItem(item *models.Item)(*models.Item, error)
-	DeleteItem(itemId int32)  error
-	GetItem(itemId int32)(*models.Item, error)
-	ListItems(filter *ItemFilter)([]*models.Item, error)
+type Repository interface {
+	CreateItem(item *models.Item) (*models.Item, error)
+	UpdateItem(item *models.Item) (*models.Item, error)
+	DeleteItem(itemId int32) error
+	GetItem(itemId int32) (*models.Item, error)
+	ListItems(filter *ItemFilter) ([]*models.Item, error)
 }
 
-
-type mapDB struct{
+type mapDB struct {
 	mu         *sync.Mutex
 	itemsTable *itemsTable
 }
@@ -33,7 +32,7 @@ type itemsTable struct {
 	maxID int32
 }
 
-func NewMapDB() Repository{
+func NewMapDB() Repository {
 	return &mapDB{
 		mu:         &sync.Mutex{},
 		itemsTable: &itemsTable{items: make(map[int32]*models.Item), maxID: 0},
@@ -66,8 +65,8 @@ func (m *mapDB) CreateItem(item *models.Item) (*models.Item, error) {
 
 func (m *mapDB) ListItems(filter *ItemFilter) ([]*models.Item, error) {
 	var res []*models.Item
-
-	//sort items 
+	fmt.Println(m.itemsTable.items)
+	//sort items
 	itemSlice := make([]*models.Item, 0, len(m.itemsTable.items))
 	for _, item := range m.itemsTable.items {
 		itemSlice = append(itemSlice, item)
@@ -81,11 +80,15 @@ func (m *mapDB) ListItems(filter *ItemFilter) ([]*models.Item, error) {
 			res = itemSlice
 			break
 		}
-		if filter.PriceLeft != nil && item.Price >= *filter.PriceLeft ||
-			filter.PriceRight != nil && item.Price >= *filter.PriceLeft {
+		fmt.Println(*filter.PriceLeft, item.Price, *filter.PriceRight)
+		if (*filter.PriceLeft<=item.Price) && (item.Price <= *filter.PriceRight) {
 
 			res = append(res, item)
 		}
+	}
+	//If filter is off
+	if filter.Limit==0 && filter.Offset==0 && filter.PriceLeft==nil && filter.PriceRight==nil {
+		return res, nil
 	}
 
 	resFiltered := make([]*models.Item, 0, len(res))
@@ -100,7 +103,6 @@ func (m *mapDB) ListItems(filter *ItemFilter) ([]*models.Item, error) {
 	}
 	return resFiltered, nil
 }
-
 
 func (m *mapDB) GetItem(ID int32) (*models.Item, error) {
 	item, ok := m.itemsTable.items[ID]

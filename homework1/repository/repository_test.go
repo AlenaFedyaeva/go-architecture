@@ -2,9 +2,88 @@ package repository
 
 import (
 	"go-architecture/homework1/models"
+	"strconv"
 	"testing"
 )
 
+func TestListItems(t *testing.T) {
+	db := NewMapDB()
+
+	expectedList := []*models.Item{}
+
+	// 1) Create items in DB
+	for i := 1; i <= 10; i++ {
+		name := "SomeName_" + strconv.Itoa(i)
+		input := &models.Item{
+			Name:  name,
+			Price: int64(i),
+		}
+		item, err := db.CreateItem(input)
+		if err != nil {
+			t.Error("unexpected err", err)
+		}
+		item.ID = int32(i)
+		expectedList = append(expectedList, item)
+	}
+	// 2) get items with empty filter
+	resultList, err := db.ListItems(&ItemFilter{})
+	if err != nil {
+		t.Error("unexpected err", err)
+	}
+	if len(resultList)!=len(expectedList){
+		t.Error("unexpected result: wrong length of list")
+	}
+
+	// 3) get items with filter
+	//Check if items equals in result & expected filtered List
+	num1,num2:=3,8 //будем брать значения в интервале от [3,8] включая крайние значения
+
+	left:=int64(num1)
+	right:=int64(num2)
+
+	expectedFilteredList:=expectedList[num1-1:num2]
+
+	filter:=&ItemFilter{
+		PriceLeft:  &left,
+		PriceRight: &right,
+		Limit:      6,
+		Offset:     0,
+	}
+	resultFilteredList, err:= db.ListItems(filter)
+	if err != nil {
+		t.Error("unexpected err", err)
+	}
+	if len(resultFilteredList)!=len(expectedFilteredList){
+		t.Error("unexpected result: wrong length of filtered list")
+	}
+	for i, expected := range expectedFilteredList {
+		
+		if expected.Name != resultFilteredList[i].Name {
+			t.Errorf("unexpected result: expected %s, result %s", expected.Name,
+			resultFilteredList[i].Name)
+		}
+		if expected.Price != resultFilteredList[i].Price {
+			t.Errorf("unexpected result: expected %d, result %d", expected.Price, 
+			resultFilteredList[i].Price)
+		}
+		if expected.ID != resultFilteredList[i].ID {
+			t.Errorf("unexpected result: expected %d, result %d", expected.ID,
+			resultFilteredList[i].ID)
+		}
+
+	}
+	//4) filter < list.size
+	filter.Limit=3
+	resultFilteredList, err= db.ListItems(filter)
+	if err != nil {
+		t.Error("unexpected err", err)
+	}
+	if len(resultFilteredList)!=filter.Limit{
+		t.Errorf("unexpected result: limit %d result.len %d ", filter.Limit, len(resultFilteredList))
+	}
+
+
+}
 
 func TestDeleteItem(t *testing.T) {
 	db := NewMapDB()
