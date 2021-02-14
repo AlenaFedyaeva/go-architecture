@@ -22,6 +22,53 @@ type Repository interface {
 	ListItems(filter *ItemFilter) ([]*models.Item, error)
 }
 
+
+type mockRepository struct {
+}
+
+func NewMockDB() Repository {
+	return &mockRepository{}
+}
+func (mock *mockRepository) ListItems(filter *ItemFilter) ([]*models.Item, error){
+	return []*models.Item{
+		&models.Item{
+			ID:    1,
+			Name:  "someName1",
+			Price: 10,
+		},
+		&models.Item{
+			ID:    2,
+			Name:  "someName2",
+			Price: 100,
+		},
+	} ,nil
+}
+func (mock *mockRepository) GetItem(itemId int32) (*models.Item, error){
+	return &models.Item{
+		ID:    1,
+		Name:  "someName1",
+		Price: 10,
+	},nil
+}
+func (mock *mockRepository)  DeleteItem(itemId int32) error{
+	return nil
+}
+func (mock *mockRepository)  UpdateItem(item *models.Item) (*models.Item, error){
+	return &models.Item{
+		ID:    1,
+		Name:  "someUpdatetName1",
+		Price: 10,
+	},nil
+}
+func (mock *mockRepository) CreateItem(item *models.Item) (*models.Item, error){
+	return &models.Item{
+		ID:    1,
+		Name:  "someUpdatetName1",
+		Price: 10,
+	},nil
+}
+
+
 type mapDB struct {
 	mu         *sync.Mutex
 	itemsTable *itemsTable

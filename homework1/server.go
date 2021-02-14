@@ -16,6 +16,11 @@ type server struct {
 	rep repository.Repository
 }
 
+func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hello,%s", "May")
+}
+
+
 func(s *server) hello(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintf(w, "Hello World!")
 }

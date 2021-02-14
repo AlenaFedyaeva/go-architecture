@@ -16,11 +16,7 @@ func main() {
 	}
 	router:= mux.NewRouter()
 	router.HandleFunc("/hello",handler.hello).Methods("GET")
-	router.HandleFunc("/item",handler.createItemHandler).Methods("POST")
-	router.HandleFunc("/item",handler.listItemHandler).Methods("GET")
-	router.HandleFunc("/item/{id}",handler.getItemHandler).Methods("GET")
-	router.HandleFunc("/item/{id}",handler.deleteItemHandler).Methods("DELETE")
-	router.HandleFunc("/item/{id}",handler.updateItemHandler).Methods("PUT")
+	setupServer(router, handler)
 	
 
 	srv:=&http.Server{
@@ -33,4 +29,12 @@ func main() {
 	}
 
 	log.Fatal(srv.ListenAndServe())
+}
+
+func setupServer(router *mux.Router, handler *server) {
+	router.HandleFunc("/item", handler.createItemHandler).Methods("POST")
+	router.HandleFunc("/item", handler.listItemHandler).Methods("GET")
+	router.HandleFunc("/item/{id}", handler.getItemHandler).Methods("GET")
+	router.HandleFunc("/item/{id}", handler.deleteItemHandler).Methods("DELETE")
+	router.HandleFunc("/item/{id}", handler.updateItemHandler).Methods("PUT")
 }
