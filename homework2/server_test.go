@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
-	"go-architecture/homework1/repository"
+	"homework2/repository"
+
+	// "go-architecture/homework1/repository"
 	"net/http"
 	"net/http/httptest"
 	"testing"

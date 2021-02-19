@@ -6,7 +6,7 @@ import "time"
 type Item struct {
 	ID        int32     `json:"id"`
 	Name      string    `json:"name"`
-	Price     int64     `json:"price"` // цена в копеках,чтобы не было плавающих чисел
+	Price     int64     `json:"price"` // цена в копейках,чтобы не было плавающих чисел
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

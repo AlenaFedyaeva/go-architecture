@@ -1,7 +1,8 @@
 package main
 
 import (
-	"go-architecture/homework1/repository"
+	// "go-architecture/homework1/repository"
+	"homework2/repository"
 	"log"
 	"net/http"
 
