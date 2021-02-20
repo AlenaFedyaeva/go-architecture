@@ -2,7 +2,6 @@ package tgbot
 
 import (
 	"errors"
-	"fmt"
 	"homework2/models"
 	"net/http"
 	"time"
@@ -38,8 +37,8 @@ func NewTelegramAPI(token string, chatID int64) (*telegramAPI, error) {
 }
 
 func (s *telegramAPI) SendOrderNotification(order *models.Order) error {
-	text := fmt.Sprintf("new order %d\nemail: %s\nphone: %s", order.ID, order.Email, order.Phone)
-
+	// text := fmt.Sprintf("new order %d\nemail: %s\nphone: %s", order.ID, order.Email, order.Phone)
+	text:="Notification from tgbot.go"
 	msg := tgbotapi.NewMessage(s.chatId, text)
 
 	_, err := s.tgBot.Send(msg)

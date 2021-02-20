@@ -28,7 +28,7 @@ type Repository interface {
 
 
 type mapDB struct {
-	mu         *sync.Mutex
+	mu          *sync.RWMutex
 	itemsTable *itemsTable
 	ordersTable *ordersTable
 }
@@ -98,8 +98,9 @@ func (m *mapDB) CreateItem(item *models.Item) (*models.Item, error) {
 		CreatedAt: timeNow,
 		UpdatedAt: timeNow,
 	}
-
+	m.mu.Lock()
 	m.itemsTable.items[newItem.ID] = newItem
+	m.mu.Unlock()
 
 	return &models.Item{
 		ID:        newItem.ID,
@@ -114,10 +115,14 @@ func (m *mapDB) ListItems(filter *ItemFilter) ([]*models.Item, error) {
 	var res []*models.Item
 	fmt.Println(m.itemsTable.items)
 	//sort items
+
+	m.mu.RLock()
 	itemSlice := make([]*models.Item, 0, len(m.itemsTable.items))
 	for _, item := range m.itemsTable.items {
 		itemSlice = append(itemSlice, item)
 	}
+	m.mu.RUnlock()
+
 	sort.Slice(itemSlice, func(i, j int) bool {
 		return itemSlice[i].ID < itemSlice[j].ID
 	})
@@ -152,7 +157,10 @@ func (m *mapDB) ListItems(filter *ItemFilter) ([]*models.Item, error) {
 }
 
 func (m *mapDB) GetItem(ID int32) (*models.Item, error) {
+	m.mu.RLock()
 	item, ok := m.itemsTable.items[ID]
+	m.mu.RUnlock()
+
 	if !ok {
 		return nil, ErrNotFound
 	}
@@ -167,17 +175,23 @@ func (m *mapDB) GetItem(ID int32) (*models.Item, error) {
 }
 
 func (m *mapDB) DeleteItem(ID int32) error {
+	m.mu.RLock()
 	_, ok := m.itemsTable.items[ID]
+	m.mu.RUnlock()
 	if !ok {
 		return ErrNotFound
 	}
 
+	m.mu.Lock()
 	delete(m.itemsTable.items, ID)
+	m.mu.Unlock()
 	return nil
 }
 
 func (m *mapDB) UpdateItem(item *models.Item) (*models.Item, error) {
+	m.mu.RLock()
 	updateItem, ok := m.itemsTable.items[item.ID]
+	m.mu.RUnlock()
 	if !ok {
 		return nil, ErrNotFound
 	}

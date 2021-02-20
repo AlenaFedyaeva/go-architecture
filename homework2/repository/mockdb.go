@@ -55,10 +55,10 @@ func (mock *mockRepository) CreateOrder(item *models.Order) (*models.Order, erro
 func (mock *mockRepository) ListOrders(filter *OrderFilter) ([]*models.Order, error){
 	return []*models.Order{
 		&models.Order{
-			ID: 1,Phone: "123" ,Name: "1@mail.ru" ,
+			ID: 1,CustomerPhone: "123" ,CustomerName: "1@mail.ru" ,
 		},
 		&models.Order{
-			ID: 2,Phone: "23" ,Name: "2@mail.ru" ,
+			ID: 2,CustomerPhone: "23" ,CustomerName: "2@mail.ru" ,
 		},
 	} ,nil
 }

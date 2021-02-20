@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "go-architecture/homework1/repository"
+	"go-architecture/homework2/service"
 	"homework2/repository"
 	"log"
 	"net/http"
@@ -11,15 +11,24 @@ import (
 
 
 func main() {
+	// var tokenStr string
+	// flag.StringVar(&tokenStr, "t", "", "token for telegram api")
+	// flag.Parse()
 
+	// tg, err := notification.NewTelegramBot(tokenStr, 323615875)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	rep := repository.NewMapDB()
 	handler := &server{
-		rep:repository.NewMapDB(),
+		rep:rep,
+	  service: service.NewService(rep, nil),
 	}
+
 	router:= mux.NewRouter()
-	router.HandleFunc("/hello",handler.hello).Methods("GET")
 	setupServer(router, handler)
 	
-
 	srv:=&http.Server{
 		Addr: ":8085",
 		//Set timeouts to avoid Slowloris attacks
@@ -33,9 +42,12 @@ func main() {
 }
 
 func setupServer(router *mux.Router, handler *server) {
-	router.HandleFunc("/item", handler.createItemHandler).Methods("POST")
-	router.HandleFunc("/item", handler.listItemHandler).Methods("GET")
-	router.HandleFunc("/item/{id}", handler.getItemHandler).Methods("GET")
-	router.HandleFunc("/item/{id}", handler.deleteItemHandler).Methods("DELETE")
-	router.HandleFunc("/item/{id}", handler.updateItemHandler).Methods("PUT")
+	router.HandleFunc("/hello",handler.hello).Methods("GET")
+	router.HandleFunc("/items", handler.createItemHandler).Methods("POST")
+	router.HandleFunc("/items", handler.listItemHandler).Methods("GET")
+	router.HandleFunc("/items/{id}", handler.getItemHandler).Methods("GET")
+	router.HandleFunc("/items/{id}", handler.deleteItemHandler).Methods("DELETE")
+	router.HandleFunc("/items/{id}", handler.updateItemHandler).Methods("PUT")
+	router.HandleFunc("/orders",  handler.listOrdersHandler).Methods("GET")
+	router.HandleFunc("/orders",  handler.createOrderHandler).Methods("POST")
 }
