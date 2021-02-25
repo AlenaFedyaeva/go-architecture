@@ -3,33 +3,30 @@ package main
 import "fmt"
 
 type Stack struct {
-	sli []int
+	list  *List
 }
 
 func NewStack(cap int) *Stack {
 	return &Stack{
-		sli: make([]int, 0, cap),
+		list: &List{},
 	}
 }
 
 func (s *Stack) Push(elem int) {
-	s.sli = append(s.sli, elem)
+	s.list.Append(elem)
 }
 func (s *Stack) Pop() int {
-	if len(s.sli) == 0 {
+	if s.list.Len() == 0 {
 		return 0
 	}
-	elem := s.sli[len(s.sli)-1]
-	s.sli = s.sli[:len(s.sli)-1]
+	elem := s.list.Head().Data
+	s.list.Delete(s.list.Head().Data)
 	return elem
 }
 
 func (s *Stack) Print(){
 	fmt.Println("Stack" )
-	for _, v := range s.sli {
-		fmt.Print(v, "  ")
-	}
-	
+	s.list.Print()
 	fmt.Println("\n-----------------" )
 }
 
