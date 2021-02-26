@@ -59,8 +59,17 @@ func stack(){
 	stack.Print()
 }
 
+func cache(){
+	arr:=[]int{ 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5}
+	cache:=NewLRUCache(3)
+	for _, elem := range arr {
+		cache.Push(elem)
+		cache.Print()
+	}
+}
 func main() {
     queue()
 	stack()
+	cache()
 	
 }

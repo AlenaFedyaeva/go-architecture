@@ -68,18 +68,19 @@ func (list *List) Preppend(elem int) *Node{
 		Data: elem,
 	}
 	list.len++
-	if list.head == nil { //1 elem
-		node.next = nil
-		node.prev = nil
-		list.head = node
-		list.tail = node
-	}
 	if list.head != nil {
 		list.head.prev=node
 		node.next = list.head
 		node.prev = nil
 		list.head = node
 	}
+	if list.head == nil { //1 elem
+		node.next = nil
+		node.prev = nil
+		list.head = node
+		list.tail = node
+	}
+	
 	return node
 
 }
