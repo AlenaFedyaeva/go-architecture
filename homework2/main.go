@@ -1,7 +1,7 @@
 package main
 
 import (
-	"flag"
+	// "homework2/notification"
 	"homework2/notification"
 	"homework2/repository"
 	"homework2/service"
@@ -12,19 +12,21 @@ import (
 )
 
 func main() {
-	var tokenStr string=""
-	flag.StringVar(&tokenStr, "t", "", "token for telegram api")
-	flag.Parse()
+	var tokenStr string="1681252822:AAFl6JcfxHnypU-xwWL13rYIeUIc2uHX2s4"
+	// flag.StringVar(&tokenStr, "t", "", "token for telegram api")
+	// flag.Parse()
 
 	tg, err := notification.NewTelegramBot(tokenStr, 1077398714)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	smtp,err:=notification.NewSMPT("1",int64(1))
+
 	rep := repository.NewMapDB()
 	handler := &server{
 		rep:     rep,
-		service: service.NewService(rep, tg),
+		service: service.NewService(rep, tg,smtp),
 	}
 
 	router := mux.NewRouter()

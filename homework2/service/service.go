@@ -14,7 +14,8 @@ type Service interface {
 }
 
 type service struct {
-	notif notification.Notification
+	tg notification.Notification
+	smtp notification.SmtpNotification 
 	rep   repository.Repository
 }
 
@@ -38,15 +39,20 @@ func (s *service) CreateOrder(order *models.Order) (*models.Order, error) {
 		return nil, err
 	}
 
-	if err := s.notif.SendOrderCreated(order); err != nil {
+	if err := s.tg.SendOrderCreated(order); err != nil {
+		log.Println(err)
+	}
+	err= s.smtp.MailOrder(order)
+	if  err != nil {
 		log.Println(err)
 	}
 	return order, err
 }
 
-func NewService(rep repository.Repository, notif notification.Notification) Service {
+func NewService(rep repository.Repository, tg notification.Notification,smpt notification.SmtpNotification) Service {
 	return &service{
-		notif: notif,
+		smtp: smpt,
+		tg: tg,
 		rep:   rep,
 	}
 }
