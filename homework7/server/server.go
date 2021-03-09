@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net"
-	pb "server/api/proto"
+
+	pb "server/proto"
 	"sort"
 	"sync"
 	"time"
@@ -140,10 +141,7 @@ func NewItemRepositoryServerStart(addr string) error {
 	if err != nil {
 		return err
 	}
-
-	s := &ItemRepositoryService{
-		db: make(map[int32]*Item),
-	}
+	s := NewMapDB()
 	serv := grpc.NewServer()
 
 	log.Println("starting grpc server at", addr)
@@ -155,6 +153,53 @@ func NewItemRepositoryServerStart(addr string) error {
 	return nil
 }
 
+func NewMapDB() pb.ItemRepositoryServer {
+	return &pb.ItemRepositoryServer{
+		mu: &sync.RWMutex{},
+		itemsTable: &itemsTable{
+			// items: map[int32]*models.Item{
+				// 1: &models.Item{
+				// 	ID:        1,
+				// 	Name:      "item1",
+				// 	Price:     50,
+				// 	CreatedAt: time.Now(),
+				// 	UpdatedAt: time.Now(),
+				// },
+				// 2: &models.Item{
+				// 	ID:        2,
+				// 	Name:      "item2",
+				// 	Price:     60,
+				// 	CreatedAt: time.Now(),
+				// 	UpdatedAt: time.Now(),
+				// },
+				// 3: &models.Item{
+				// 	ID:        3,
+				// 	Name:      "item3",
+				// 	Price:     70,
+				// 	CreatedAt: time.Now(),
+				// 	UpdatedAt: time.Now(),
+				// },
+				// 4: &models.Item{
+				// 	ID:        4,
+				// 	Name:      "item4",
+				// 	Price:     80,
+				// 	CreatedAt: time.Now(),
+				// 	UpdatedAt: time.Now(),
+				// },
+			// },
+			maxID: 4,
+		},
+		// ordersTable: &ordersTable{
+		// 	orders: make(map[int32]*models.Order),
+		// 	maxID:  0,
+		// },
+	}
+}
+
 func main() {
+
+	
+
+
 	NewItemRepositoryServerStart("localhost:9094")
 }

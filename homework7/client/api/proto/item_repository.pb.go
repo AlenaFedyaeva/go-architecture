@@ -35,7 +35,7 @@ func (m *BlockUserRequest) Reset()         { *m = BlockUserRequest{} }
 func (m *BlockUserRequest) String() string { return proto.CompactTextString(m) }
 func (*BlockUserRequest) ProtoMessage()    {}
 func (*BlockUserRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_item_repository_a96c5046ef22d7f6, []int{0}
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{0}
 }
 func (m *BlockUserRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BlockUserRequest.Unmarshal(m, b)
@@ -81,7 +81,7 @@ func (m *BlockUserResponse) Reset()         { *m = BlockUserResponse{} }
 func (m *BlockUserResponse) String() string { return proto.CompactTextString(m) }
 func (*BlockUserResponse) ProtoMessage()    {}
 func (*BlockUserResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_item_repository_a96c5046ef22d7f6, []int{1}
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{1}
 }
 func (m *BlockUserResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BlockUserResponse.Unmarshal(m, b)
@@ -128,7 +128,7 @@ func (m *Item) Reset()         { *m = Item{} }
 func (m *Item) String() string { return proto.CompactTextString(m) }
 func (*Item) ProtoMessage()    {}
 func (*Item) Descriptor() ([]byte, []int) {
-	return fileDescriptor_item_repository_a96c5046ef22d7f6, []int{2}
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{2}
 }
 func (m *Item) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Item.Unmarshal(m, b)
@@ -169,6 +169,154 @@ func (m *Item) GetPrice() int64 {
 	return 0
 }
 
+type Order struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CustomerPhone        string   `protobuf:"bytes,3,opt,name=customer_phone,json=customerPhone,proto3" json:"customer_phone,omitempty"`
+	CustomerName         string   `protobuf:"bytes,4,opt,name=customer_name,json=customerName,proto3" json:"customer_name,omitempty"`
+	Price                int64    `protobuf:"varint,5,opt,name=price,proto3" json:"price,omitempty"`
+	ItemIds              []int32  `protobuf:"varint,6,rep,packed,name=item_ids,json=itemIds,proto3" json:"item_ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Order) Reset()         { *m = Order{} }
+func (m *Order) String() string { return proto.CompactTextString(m) }
+func (*Order) ProtoMessage()    {}
+func (*Order) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{3}
+}
+func (m *Order) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Order.Unmarshal(m, b)
+}
+func (m *Order) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Order.Marshal(b, m, deterministic)
+}
+func (dst *Order) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Order.Merge(dst, src)
+}
+func (m *Order) XXX_Size() int {
+	return xxx_messageInfo_Order.Size(m)
+}
+func (m *Order) XXX_DiscardUnknown() {
+	xxx_messageInfo_Order.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Order proto.InternalMessageInfo
+
+func (m *Order) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *Order) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Order) GetCustomerPhone() string {
+	if m != nil {
+		return m.CustomerPhone
+	}
+	return ""
+}
+
+func (m *Order) GetCustomerName() string {
+	if m != nil {
+		return m.CustomerName
+	}
+	return ""
+}
+
+func (m *Order) GetPrice() int64 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *Order) GetItemIds() []int32 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
+type CreateOrderRequest struct {
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	CustomerPhone        string   `protobuf:"bytes,2,opt,name=customer_phone,json=customerPhone,proto3" json:"customer_phone,omitempty"`
+	CustomerName         string   `protobuf:"bytes,3,opt,name=customer_name,json=customerName,proto3" json:"customer_name,omitempty"`
+	Price                int64    `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	ItemIds              []int32  `protobuf:"varint,5,rep,packed,name=item_ids,json=itemIds,proto3" json:"item_ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateOrderRequest) Reset()         { *m = CreateOrderRequest{} }
+func (m *CreateOrderRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateOrderRequest) ProtoMessage()    {}
+func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{4}
+}
+func (m *CreateOrderRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateOrderRequest.Unmarshal(m, b)
+}
+func (m *CreateOrderRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateOrderRequest.Marshal(b, m, deterministic)
+}
+func (dst *CreateOrderRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateOrderRequest.Merge(dst, src)
+}
+func (m *CreateOrderRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateOrderRequest.Size(m)
+}
+func (m *CreateOrderRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateOrderRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateOrderRequest proto.InternalMessageInfo
+
+func (m *CreateOrderRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *CreateOrderRequest) GetCustomerPhone() string {
+	if m != nil {
+		return m.CustomerPhone
+	}
+	return ""
+}
+
+func (m *CreateOrderRequest) GetCustomerName() string {
+	if m != nil {
+		return m.CustomerName
+	}
+	return ""
+}
+
+func (m *CreateOrderRequest) GetPrice() int64 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *CreateOrderRequest) GetItemIds() []int32 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
 type CreateItemRequest struct {
 	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Price                int64    `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
@@ -181,7 +329,7 @@ func (m *CreateItemRequest) Reset()         { *m = CreateItemRequest{} }
 func (m *CreateItemRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateItemRequest) ProtoMessage()    {}
 func (*CreateItemRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_item_repository_a96c5046ef22d7f6, []int{3}
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{5}
 }
 func (m *CreateItemRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateItemRequest.Unmarshal(m, b)
@@ -215,38 +363,168 @@ func (m *CreateItemRequest) GetPrice() int64 {
 	return 0
 }
 
-type ListItemResponse struct {
+type UpdateItemRequest struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Price                int64    `protobuf:"varint,3,opt,name=price,proto3" json:"price,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateItemRequest) Reset()         { *m = UpdateItemRequest{} }
+func (m *UpdateItemRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateItemRequest) ProtoMessage()    {}
+func (*UpdateItemRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{6}
+}
+func (m *UpdateItemRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateItemRequest.Unmarshal(m, b)
+}
+func (m *UpdateItemRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateItemRequest.Marshal(b, m, deterministic)
+}
+func (dst *UpdateItemRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateItemRequest.Merge(dst, src)
+}
+func (m *UpdateItemRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateItemRequest.Size(m)
+}
+func (m *UpdateItemRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateItemRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateItemRequest proto.InternalMessageInfo
+
+func (m *UpdateItemRequest) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *UpdateItemRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *UpdateItemRequest) GetPrice() int64 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+type DeleteItemRequest struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteItemRequest) Reset()         { *m = DeleteItemRequest{} }
+func (m *DeleteItemRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteItemRequest) ProtoMessage()    {}
+func (*DeleteItemRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{7}
+}
+func (m *DeleteItemRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteItemRequest.Unmarshal(m, b)
+}
+func (m *DeleteItemRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteItemRequest.Marshal(b, m, deterministic)
+}
+func (dst *DeleteItemRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteItemRequest.Merge(dst, src)
+}
+func (m *DeleteItemRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteItemRequest.Size(m)
+}
+func (m *DeleteItemRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteItemRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteItemRequest proto.InternalMessageInfo
+
+func (m *DeleteItemRequest) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type GetItemRequest struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetItemRequest) Reset()         { *m = GetItemRequest{} }
+func (m *GetItemRequest) String() string { return proto.CompactTextString(m) }
+func (*GetItemRequest) ProtoMessage()    {}
+func (*GetItemRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{8}
+}
+func (m *GetItemRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetItemRequest.Unmarshal(m, b)
+}
+func (m *GetItemRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetItemRequest.Marshal(b, m, deterministic)
+}
+func (dst *GetItemRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetItemRequest.Merge(dst, src)
+}
+func (m *GetItemRequest) XXX_Size() int {
+	return xxx_messageInfo_GetItemRequest.Size(m)
+}
+func (m *GetItemRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetItemRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetItemRequest proto.InternalMessageInfo
+
+func (m *GetItemRequest) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type ListItemsResponse struct {
 	Items                []*Item  `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ListItemResponse) Reset()         { *m = ListItemResponse{} }
-func (m *ListItemResponse) String() string { return proto.CompactTextString(m) }
-func (*ListItemResponse) ProtoMessage()    {}
-func (*ListItemResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_item_repository_a96c5046ef22d7f6, []int{4}
+func (m *ListItemsResponse) Reset()         { *m = ListItemsResponse{} }
+func (m *ListItemsResponse) String() string { return proto.CompactTextString(m) }
+func (*ListItemsResponse) ProtoMessage()    {}
+func (*ListItemsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{9}
 }
-func (m *ListItemResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListItemResponse.Unmarshal(m, b)
+func (m *ListItemsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListItemsResponse.Unmarshal(m, b)
 }
-func (m *ListItemResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListItemResponse.Marshal(b, m, deterministic)
+func (m *ListItemsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListItemsResponse.Marshal(b, m, deterministic)
 }
-func (dst *ListItemResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListItemResponse.Merge(dst, src)
+func (dst *ListItemsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListItemsResponse.Merge(dst, src)
 }
-func (m *ListItemResponse) XXX_Size() int {
-	return xxx_messageInfo_ListItemResponse.Size(m)
+func (m *ListItemsResponse) XXX_Size() int {
+	return xxx_messageInfo_ListItemsResponse.Size(m)
 }
-func (m *ListItemResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListItemResponse.DiscardUnknown(m)
+func (m *ListItemsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListItemsResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListItemResponse proto.InternalMessageInfo
+var xxx_messageInfo_ListItemsResponse proto.InternalMessageInfo
 
-func (m *ListItemResponse) GetItems() []*Item {
+func (m *ListItemsResponse) GetItems() []*Item {
 	if m != nil {
 		return m.Items
 	}
@@ -267,7 +545,7 @@ func (m *ListItemsRequest) Reset()         { *m = ListItemsRequest{} }
 func (m *ListItemsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListItemsRequest) ProtoMessage()    {}
 func (*ListItemsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_item_repository_a96c5046ef22d7f6, []int{5}
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{10}
 }
 func (m *ListItemsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListItemsRequest.Unmarshal(m, b)
@@ -315,13 +593,104 @@ func (m *ListItemsRequest) GetOffset() int32 {
 	return 0
 }
 
+type ListOrdersRequest struct {
+	Limit                int32    `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset               int32    `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListOrdersRequest) Reset()         { *m = ListOrdersRequest{} }
+func (m *ListOrdersRequest) String() string { return proto.CompactTextString(m) }
+func (*ListOrdersRequest) ProtoMessage()    {}
+func (*ListOrdersRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{11}
+}
+func (m *ListOrdersRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListOrdersRequest.Unmarshal(m, b)
+}
+func (m *ListOrdersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListOrdersRequest.Marshal(b, m, deterministic)
+}
+func (dst *ListOrdersRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListOrdersRequest.Merge(dst, src)
+}
+func (m *ListOrdersRequest) XXX_Size() int {
+	return xxx_messageInfo_ListOrdersRequest.Size(m)
+}
+func (m *ListOrdersRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListOrdersRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListOrdersRequest proto.InternalMessageInfo
+
+func (m *ListOrdersRequest) GetLimit() int32 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+func (m *ListOrdersRequest) GetOffset() int32 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+type ListOrdersResponse struct {
+	Items                []*Order `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListOrdersResponse) Reset()         { *m = ListOrdersResponse{} }
+func (m *ListOrdersResponse) String() string { return proto.CompactTextString(m) }
+func (*ListOrdersResponse) ProtoMessage()    {}
+func (*ListOrdersResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_item_repository_42998ce14f52bbcb, []int{12}
+}
+func (m *ListOrdersResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListOrdersResponse.Unmarshal(m, b)
+}
+func (m *ListOrdersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListOrdersResponse.Marshal(b, m, deterministic)
+}
+func (dst *ListOrdersResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListOrdersResponse.Merge(dst, src)
+}
+func (m *ListOrdersResponse) XXX_Size() int {
+	return xxx_messageInfo_ListOrdersResponse.Size(m)
+}
+func (m *ListOrdersResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListOrdersResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListOrdersResponse proto.InternalMessageInfo
+
+func (m *ListOrdersResponse) GetItems() []*Order {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*BlockUserRequest)(nil), "proto.BlockUserRequest")
 	proto.RegisterType((*BlockUserResponse)(nil), "proto.BlockUserResponse")
 	proto.RegisterType((*Item)(nil), "proto.Item")
+	proto.RegisterType((*Order)(nil), "proto.Order")
+	proto.RegisterType((*CreateOrderRequest)(nil), "proto.CreateOrderRequest")
 	proto.RegisterType((*CreateItemRequest)(nil), "proto.CreateItemRequest")
-	proto.RegisterType((*ListItemResponse)(nil), "proto.ListItemResponse")
+	proto.RegisterType((*UpdateItemRequest)(nil), "proto.UpdateItemRequest")
+	proto.RegisterType((*DeleteItemRequest)(nil), "proto.DeleteItemRequest")
+	proto.RegisterType((*GetItemRequest)(nil), "proto.GetItemRequest")
+	proto.RegisterType((*ListItemsResponse)(nil), "proto.ListItemsResponse")
 	proto.RegisterType((*ListItemsRequest)(nil), "proto.ListItemsRequest")
+	proto.RegisterType((*ListOrdersRequest)(nil), "proto.ListOrdersRequest")
+	proto.RegisterType((*ListOrdersResponse)(nil), "proto.ListOrdersResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -339,6 +708,11 @@ type ItemRepositoryClient interface {
 	CreateItem(ctx context.Context, in *CreateItemRequest, opts ...grpc.CallOption) (*Item, error)
 	ListItems(ctx context.Context, in *ListItemsRequest, opts ...grpc.CallOption) (*Item, error)
 	BlockUser(ctx context.Context, in *BlockUserRequest, opts ...grpc.CallOption) (*BlockUserResponse, error)
+	UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*Item, error)
+	DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*Item, error)
+	GetItem(ctx context.Context, in *GetItemRequest, opts ...grpc.CallOption) (*Item, error)
+	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*Order, error)
+	ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error)
 }
 
 type itemRepositoryClient struct {
@@ -376,11 +750,61 @@ func (c *itemRepositoryClient) BlockUser(ctx context.Context, in *BlockUserReque
 	return out, nil
 }
 
+func (c *itemRepositoryClient) UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*Item, error) {
+	out := new(Item)
+	err := c.cc.Invoke(ctx, "/proto.ItemRepository/UpdateItem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemRepositoryClient) DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*Item, error) {
+	out := new(Item)
+	err := c.cc.Invoke(ctx, "/proto.ItemRepository/DeleteItem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemRepositoryClient) GetItem(ctx context.Context, in *GetItemRequest, opts ...grpc.CallOption) (*Item, error) {
+	out := new(Item)
+	err := c.cc.Invoke(ctx, "/proto.ItemRepository/GetItem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemRepositoryClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*Order, error) {
+	out := new(Order)
+	err := c.cc.Invoke(ctx, "/proto.ItemRepository/CreateOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemRepositoryClient) ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error) {
+	out := new(ListOrdersResponse)
+	err := c.cc.Invoke(ctx, "/proto.ItemRepository/ListOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ItemRepositoryServer is the server API for ItemRepository service.
 type ItemRepositoryServer interface {
 	CreateItem(context.Context, *CreateItemRequest) (*Item, error)
 	ListItems(context.Context, *ListItemsRequest) (*Item, error)
 	BlockUser(context.Context, *BlockUserRequest) (*BlockUserResponse, error)
+	UpdateItem(context.Context, *UpdateItemRequest) (*Item, error)
+	DeleteItem(context.Context, *DeleteItemRequest) (*Item, error)
+	GetItem(context.Context, *GetItemRequest) (*Item, error)
+	CreateOrder(context.Context, *CreateOrderRequest) (*Order, error)
+	ListOrders(context.Context, *ListOrdersRequest) (*ListOrdersResponse, error)
 }
 
 func RegisterItemRepositoryServer(s *grpc.Server, srv ItemRepositoryServer) {
@@ -441,6 +865,96 @@ func _ItemRepository_BlockUser_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ItemRepository_UpdateItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemRepositoryServer).UpdateItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ItemRepository/UpdateItem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemRepositoryServer).UpdateItem(ctx, req.(*UpdateItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ItemRepository_DeleteItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemRepositoryServer).DeleteItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ItemRepository/DeleteItem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemRepositoryServer).DeleteItem(ctx, req.(*DeleteItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ItemRepository_GetItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemRepositoryServer).GetItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ItemRepository/GetItem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemRepositoryServer).GetItem(ctx, req.(*GetItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ItemRepository_CreateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemRepositoryServer).CreateOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ItemRepository/CreateOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemRepositoryServer).CreateOrder(ctx, req.(*CreateOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ItemRepository_ListOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemRepositoryServer).ListOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ItemRepository/ListOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemRepositoryServer).ListOrders(ctx, req.(*ListOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ItemRepository_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "proto.ItemRepository",
 	HandlerType: (*ItemRepositoryServer)(nil),
@@ -457,37 +971,71 @@ var _ItemRepository_serviceDesc = grpc.ServiceDesc{
 			MethodName: "BlockUser",
 			Handler:    _ItemRepository_BlockUser_Handler,
 		},
+		{
+			MethodName: "UpdateItem",
+			Handler:    _ItemRepository_UpdateItem_Handler,
+		},
+		{
+			MethodName: "DeleteItem",
+			Handler:    _ItemRepository_DeleteItem_Handler,
+		},
+		{
+			MethodName: "GetItem",
+			Handler:    _ItemRepository_GetItem_Handler,
+		},
+		{
+			MethodName: "CreateOrder",
+			Handler:    _ItemRepository_CreateOrder_Handler,
+		},
+		{
+			MethodName: "ListOrders",
+			Handler:    _ItemRepository_ListOrders_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "item_repository.proto",
 }
 
 func init() {
-	proto.RegisterFile("item_repository.proto", fileDescriptor_item_repository_a96c5046ef22d7f6)
+	proto.RegisterFile("item_repository.proto", fileDescriptor_item_repository_42998ce14f52bbcb)
 }
 
-var fileDescriptor_item_repository_a96c5046ef22d7f6 = []byte{
-	// 344 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0x3f, 0x6f, 0xf2, 0x30,
-	0x10, 0xc6, 0x71, 0x42, 0x78, 0xdf, 0x1c, 0x12, 0x02, 0xab, 0x7f, 0x2c, 0xa4, 0xaa, 0xa9, 0xa7,
-	0x4c, 0x0c, 0x20, 0xba, 0x55, 0x45, 0xed, 0x54, 0x89, 0xc9, 0x52, 0x67, 0x44, 0xe1, 0xd2, 0x5a,
-	0x25, 0x38, 0xb5, 0xdd, 0xa1, 0x9d, 0xfa, 0xc9, 0xfa, 0xd9, 0xaa, 0xd8, 0x09, 0x44, 0xd0, 0xa1,
-	0x13, 0xbe, 0x3b, 0x7e, 0xbe, 0xe7, 0x79, 0x1c, 0x38, 0x95, 0x16, 0xf3, 0x85, 0xc6, 0x42, 0x19,
-	0x69, 0x95, 0xfe, 0x18, 0x15, 0x5a, 0x59, 0x45, 0x23, 0xf7, 0xc3, 0xaf, 0xa1, 0x7f, 0xb7, 0x51,
-	0xab, 0xd7, 0x47, 0x83, 0x5a, 0xe0, 0xdb, 0x3b, 0x1a, 0x4b, 0x7b, 0x10, 0xc8, 0x35, 0x23, 0x09,
-	0x49, 0x23, 0x11, 0xc8, 0x35, 0xa5, 0xd0, 0xde, 0x2e, 0x73, 0x64, 0x41, 0x42, 0xd2, 0x58, 0xb8,
-	0x33, 0xbf, 0x85, 0x41, 0x83, 0x33, 0x85, 0xda, 0x1a, 0xa4, 0x7d, 0x08, 0x35, 0x7e, 0x3a, 0xf2,
-	0xbf, 0x28, 0x8f, 0x94, 0xc1, 0x3f, 0xd4, 0xba, 0x41, 0xd7, 0x25, 0x9f, 0x41, 0xfb, 0xc1, 0x62,
-	0xfe, 0x97, 0x65, 0xf4, 0x04, 0xa2, 0x42, 0xcb, 0x15, 0xb2, 0x30, 0x21, 0x69, 0x28, 0x7c, 0xc1,
-	0x6f, 0x60, 0x70, 0xaf, 0x71, 0x69, 0xb1, 0xbc, 0xa7, 0xd6, 0x5e, 0xe3, 0xe4, 0x37, 0x3c, 0x68,
-	0xe2, 0x53, 0xe8, 0xcf, 0xa5, 0xb1, 0x1e, 0xae, 0x0c, 0x5c, 0x41, 0x54, 0xa6, 0x65, 0x18, 0x49,
-	0xc2, 0xb4, 0x3b, 0xee, 0xfa, 0xac, 0x46, 0xee, 0x3f, 0x7e, 0xc2, 0xbf, 0xc8, 0x9e, 0x33, 0xf5,
-	0xd6, 0x4b, 0xe8, 0xba, 0x4b, 0x17, 0x5a, 0x3e, 0xbf, 0x58, 0xb7, 0x3c, 0x14, 0xe0, 0x5a, 0xa2,
-	0xec, 0xd0, 0x0b, 0xf0, 0xd5, 0x62, 0x83, 0x99, 0xad, 0x74, 0xc4, 0xae, 0x33, 0xc7, 0xcc, 0x96,
-	0x0a, 0x37, 0x32, 0x97, 0xd6, 0x19, 0x8c, 0x84, 0x2f, 0xe8, 0x19, 0x74, 0x54, 0x96, 0x19, 0xb4,
-	0xac, 0xed, 0xda, 0x55, 0x35, 0xfe, 0x26, 0xd0, 0xf3, 0xb2, 0xeb, 0x37, 0xa5, 0x53, 0x80, 0x7d,
-	0x16, 0x94, 0x55, 0xba, 0x8f, 0xe2, 0x19, 0x36, 0x1d, 0xf1, 0x16, 0x9d, 0x40, 0xbc, 0xf3, 0x42,
-	0xcf, 0xab, 0xd9, 0xa1, 0xbb, 0x43, 0x68, 0x06, 0xf1, 0xee, 0xe9, 0x77, 0xd0, 0xe1, 0x47, 0x34,
-	0x64, 0xc7, 0x03, 0x1f, 0x32, 0x6f, 0x3d, 0x75, 0xdc, 0x68, 0xf2, 0x13, 0x00, 0x00, 0xff, 0xff,
-	0x39, 0x93, 0x5f, 0xde, 0x9b, 0x02, 0x00, 0x00,
+var fileDescriptor_item_repository_42998ce14f52bbcb = []byte{
+	// 571 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x4d, 0x6f, 0xd3, 0x40,
+	0x10, 0xad, 0xed, 0x38, 0x69, 0x26, 0x25, 0x4a, 0x46, 0x14, 0x9c, 0x48, 0x08, 0xb3, 0x15, 0x52,
+	0x4e, 0x45, 0x6a, 0xd5, 0xaa, 0x17, 0x44, 0xa1, 0x48, 0xa8, 0x52, 0xf9, 0xd0, 0x4a, 0x3d, 0x47,
+	0x25, 0x9e, 0x50, 0x8b, 0x24, 0x36, 0xbb, 0xdb, 0x03, 0x9c, 0xf8, 0x33, 0x48, 0xfc, 0x28, 0x7e,
+	0x0c, 0xf2, 0xae, 0xbd, 0xb1, 0x9d, 0x62, 0x45, 0x9c, 0xe2, 0x99, 0xd9, 0xf7, 0xf6, 0xcd, 0xcc,
+	0xcb, 0xc2, 0x7e, 0xac, 0x68, 0x39, 0x15, 0x94, 0x26, 0x32, 0x56, 0x89, 0xf8, 0x7e, 0x98, 0x8a,
+	0x44, 0x25, 0xe8, 0xeb, 0x1f, 0x76, 0x0a, 0x83, 0x37, 0x8b, 0x64, 0xf6, 0xf5, 0x5a, 0x92, 0xe0,
+	0xf4, 0xed, 0x8e, 0xa4, 0xc2, 0x3e, 0xb8, 0x71, 0x14, 0x38, 0xa1, 0x33, 0xf1, 0xb9, 0x1b, 0x47,
+	0x88, 0xd0, 0x5a, 0xdd, 0x2c, 0x29, 0x70, 0x43, 0x67, 0xd2, 0xe5, 0xfa, 0x9b, 0xbd, 0x82, 0x61,
+	0x09, 0x27, 0xd3, 0x64, 0x25, 0x09, 0x07, 0xe0, 0x09, 0xfa, 0xa1, 0x91, 0xbb, 0x3c, 0xfb, 0xc4,
+	0x00, 0x3a, 0x24, 0x44, 0x09, 0x5d, 0x84, 0xec, 0x1c, 0x5a, 0x97, 0x8a, 0x96, 0xdb, 0x5c, 0x86,
+	0x0f, 0xc1, 0x4f, 0x45, 0x3c, 0xa3, 0xc0, 0x0b, 0x9d, 0x89, 0xc7, 0x4d, 0xc0, 0x7e, 0x3b, 0xe0,
+	0x7f, 0x14, 0x11, 0x89, 0xad, 0x38, 0x9e, 0x43, 0x7f, 0x76, 0x27, 0x55, 0xb2, 0x24, 0x31, 0x4d,
+	0x6f, 0x93, 0x95, 0x21, 0xeb, 0xf2, 0x07, 0x45, 0xf6, 0x53, 0x96, 0xc4, 0x03, 0xb0, 0x89, 0xa9,
+	0xe6, 0x68, 0xe9, 0x53, 0x7b, 0x45, 0xf2, 0x43, 0x45, 0x8f, 0x5f, 0xd2, 0x83, 0x23, 0xd8, 0xd5,
+	0xa3, 0x8e, 0x23, 0x19, 0xb4, 0x43, 0x6f, 0xe2, 0xf3, 0x4e, 0x16, 0x5f, 0x46, 0x92, 0xfd, 0x72,
+	0x00, 0x2f, 0x04, 0xdd, 0x28, 0xd2, 0x82, 0x8b, 0x41, 0x17, 0x3a, 0x9d, 0x46, 0x9d, 0xee, 0x56,
+	0x3a, 0xbd, 0x26, 0x9d, 0xad, 0x7f, 0xe9, 0xf4, 0xab, 0x3a, 0x5f, 0xc2, 0xd0, 0xc8, 0xcc, 0x56,
+	0xd3, 0xa4, 0xd2, 0x32, 0xbb, 0xe5, 0x8d, 0xbc, 0x87, 0xe1, 0x75, 0x1a, 0xd5, 0xe0, 0xff, 0xbf,
+	0xe0, 0x03, 0x18, 0xbe, 0xa5, 0x05, 0x35, 0xd2, 0xb1, 0x10, 0xfa, 0xef, 0x48, 0x35, 0x9d, 0x38,
+	0x85, 0xe1, 0x55, 0x2c, 0xf5, 0x11, 0x69, 0xad, 0xfa, 0x0c, 0xfc, 0xac, 0x69, 0x19, 0x38, 0xa1,
+	0x37, 0xe9, 0x1d, 0xf5, 0xcc, 0xbf, 0xe2, 0x50, 0xf3, 0x98, 0x0a, 0xfb, 0xe9, 0xc0, 0xa0, 0x04,
+	0x34, 0xe4, 0x4f, 0xa1, 0xa7, 0xc5, 0x4d, 0x45, 0xfc, 0xe5, 0x56, 0xe9, 0x5b, 0x3c, 0x0e, 0x3a,
+	0xc5, 0xb3, 0x0c, 0x3e, 0x01, 0x13, 0x4d, 0x17, 0x34, 0x57, 0xf9, 0x78, 0xba, 0x3a, 0x73, 0x45,
+	0x73, 0x95, 0x75, 0xba, 0x88, 0x97, 0xb1, 0xd2, 0x9d, 0xfa, 0xdc, 0x04, 0xf8, 0x08, 0xda, 0xc9,
+	0x7c, 0x2e, 0x49, 0xe9, 0x4d, 0xf9, 0x3c, 0x8f, 0xd8, 0x6b, 0x23, 0x5d, 0x9b, 0xc6, 0x4a, 0xb0,
+	0x14, 0xce, 0xfd, 0x14, 0x6e, 0x85, 0xe2, 0x0c, 0xb0, 0x4c, 0x91, 0xb7, 0xcf, 0xaa, 0xed, 0xef,
+	0xe5, 0xed, 0x1b, 0x77, 0x9a, 0xd2, 0xd1, 0x1f, 0x0f, 0xfa, 0x66, 0xae, 0xc5, 0xd3, 0x81, 0x27,
+	0x00, 0x6b, 0x7f, 0x60, 0x90, 0xa3, 0x36, 0x2c, 0x33, 0x2e, 0x8f, 0x93, 0xed, 0xe0, 0x31, 0x74,
+	0xed, 0x20, 0xf1, 0x71, 0x5e, 0xab, 0x8f, 0xb6, 0x0e, 0x3a, 0x87, 0xae, 0x7d, 0x61, 0x2c, 0xa8,
+	0xfe, 0x56, 0x8d, 0x83, 0xcd, 0x82, 0x69, 0x91, 0xed, 0x64, 0x6a, 0xd7, 0x76, 0xb4, 0x6a, 0x37,
+	0x1c, 0x5a, 0xbf, 0xf8, 0x04, 0x60, 0x6d, 0x3b, 0x0b, 0xdb, 0x70, 0x62, 0x1d, 0xf6, 0x02, 0x3a,
+	0xb9, 0x11, 0x71, 0x3f, 0xaf, 0x54, 0x8d, 0x59, 0x07, 0x9c, 0x41, 0xaf, 0xf4, 0x26, 0xe0, 0xa8,
+	0x32, 0xcd, 0xf2, 0x3b, 0x31, 0xae, 0xac, 0x87, 0xed, 0xe0, 0x05, 0xc0, 0x7a, 0xa7, 0x56, 0xe1,
+	0x86, 0x53, 0xc6, 0xa3, 0x7b, 0x2a, 0xc5, 0x74, 0x3e, 0xb7, 0x75, 0xed, 0xf8, 0x6f, 0x00, 0x00,
+	0x00, 0xff, 0xff, 0xf5, 0x51, 0xd0, 0x0a, 0x20, 0x06, 0x00, 0x00,
 }
