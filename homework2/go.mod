@@ -1,4 +1,3 @@
-// module go-architecture/homework1
 module homework2
 
 go 1.14

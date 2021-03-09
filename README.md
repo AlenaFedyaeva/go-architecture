@@ -19,6 +19,7 @@ postman:
      "item_ids": [1,2]  
 }
 
+3) GOOGLE. To send mail need to !Less secure app access! (settings in account)
 
 # Links 
  

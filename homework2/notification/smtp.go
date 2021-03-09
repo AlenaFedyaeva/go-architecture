@@ -1,49 +1,57 @@
 package notification
 
 import (
+	"encoding/json"
 	"fmt"
 	"homework2/models"
 	"net/smtp"
 )
 
 type smtpBot struct {
-	smtp   int
-	chatId int64
+	login string `json:"login"`
+	pass string `json:"pass"`
+	receiver string `json:"receiver"`
 }
 
 type SmtpNotification interface {
 	MailOrder(order *models.Order) error
 }
 
-func NewSMPT(token string, chatID int64) (SmtpNotification, error) {
+func NewSMPT(login string, pass string, receiver string) (SmtpNotification, error) {
 	return &smtpBot{
-		chatId: chatID,
+		login: login,
+		pass: pass,
+		receiver: receiver,
 	}, nil
 }
 
 func (s *smtpBot) MailOrder(order *models.Order) error {
 
 	// Sender data.
-	from := "291407@gmail.com"
-	password := "rjcnz29140Felix!"
+	from := s.login
+	password := s.pass
+	to:=[]string{s.receiver}
 
-	// Receiver email address.
-	to := []string{
-		"black_cat144@mail.ru",
-	}
-
+	
 	// smtp server configuration.
 	smtpHost := "smtp.gmail.com"
-	smtpPort := "587"//"465"
+	smtpPort := ":587"
+	
+	var message []byte
+	str:=fmt.Sprintf(" order %d from: %s Phone: %s",order.ID,order.CustomerName,order.CustomerPhone,order.ItemIDs)
+    message,err:=json.Marshal(str)
+	// message := []byte("This is a test email message.")
 
-	// Message.
-	message := []byte("This is a test email message.")
-
+	if err != nil {
+		return err
+	}
+	fmt.Println(str)
+	
 	// Authentication.
 	auth := smtp.PlainAuth("", from, password, smtpHost)
 
 	// Sending email.
-	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
+	err= smtp.SendMail(smtpHost+smtpPort, auth, from,to , message)
 	if err != nil {
 		fmt.Println(err)
 		return err

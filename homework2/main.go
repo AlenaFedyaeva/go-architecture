@@ -1,7 +1,8 @@
 package main
 
 import (
-	// "homework2/notification"
+	"flag"
+	"fmt"
 	"homework2/notification"
 	"homework2/repository"
 	"homework2/service"
@@ -12,16 +13,21 @@ import (
 )
 
 func main() {
-	var tokenStr string="1681252822:AAFl6JcfxHnypU-xwWL13rYIeUIc2uHX2s4"
-	// flag.StringVar(&tokenStr, "t", "", "token for telegram api")
-	// flag.Parse()
+	var tokenTgStr string 
+	var smtpStrLog,smtpStrPass, smtpReceiver string
+	flag.StringVar(&tokenTgStr, "tg", "", "token for telegram api")
+	flag.StringVar(&smtpStrLog, "smtpL", "", "log for smtp")
+	flag.StringVar(&smtpStrPass, "smtpP", "", "pass for smtp")
+	flag.StringVar(&smtpReceiver,"smtpReceiver","", "receiver smtp")
+	flag.Parse()
 
-	tg, err := notification.NewTelegramBot(tokenStr, 1077398714)
+	fmt.Println(tokenTgStr, smtpStrLog, smtpStrPass,smtpReceiver)
+	tg, err := notification.NewTelegramBot(tokenTgStr, 1077398714)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	smtp,err:=notification.NewSMPT("1",int64(1))
+	smtp,err:=notification.NewSMPT(smtpStrLog,smtpStrPass,smtpReceiver)
 
 	rep := repository.NewMapDB()
 	handler := &server{
