@@ -381,6 +381,7 @@ type ItemRepositoryServer interface {
 	CreateItem(context.Context, *CreateItemRequest) (*Item, error)
 	ListItems(context.Context, *ListItemsRequest) (*Item, error)
 	BlockUser(context.Context, *BlockUserRequest) (*BlockUserResponse, error)
+
 }
 
 func RegisterItemRepositoryServer(s *grpc.Server, srv ItemRepositoryServer) {

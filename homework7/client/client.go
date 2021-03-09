@@ -43,5 +43,5 @@ func main() {
 	if err!=nil {
 		log.Println(err)
 	}
-	log.Println("item updated", *resp)
+	log.Println("item updated", *resp.Items[0])
 }

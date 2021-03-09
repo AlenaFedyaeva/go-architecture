@@ -5,6 +5,15 @@ service ItemRepository{
     rpc CreateItem(CreateItemRequest) returns (Item){}
     rpc ListItems(ListItemsRequest) returns (Item) {}
     rpc BlockUser(BlockUserRequest) returns (BlockUserResponse) {}
+    
+    // rpс UpdateItem(item *models.Item) (*models.Item, error)
+	// rpс DeleteItem(itemId int32) error
+	// rpс GetItem(itemId int32) (*models.Item, error)
+	// rpс ListItems(filter *ItemFilter) ([]*models.Item, error)
+	
+	// rpс CreateOrder(order *models.Order) (*models.Order, error)
+	// rpс ListOrders(filter *OrderFilter) ([]*models.Order, error)
+
 }
 
 message BlockUserRequest{
