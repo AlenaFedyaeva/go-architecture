@@ -15,27 +15,27 @@ type Worker struct {
 	jobChan <-chan *Job
 }
 
-func main() {
-	wg := &sync.WaitGroup{}
-	jobChan := make(chan *Job)
-	for i := 0; i < 5; i++ {
-		worker := NewWorker(i+1, wg, jobChan)
-		wg.Add(1)
-		go worker.Handle()
-	}
+// func main() {
+// 	wg := &sync.WaitGroup{}
+// 	jobChan := make(chan *Job)
+// 	for i := 0; i < 5; i++ {
+// 		worker := NewWorker(i+1, wg, jobChan)
+// 		wg.Add(1)
+// 		go worker.Handle()
+// 	}
 
-	jobChan <- &Job{
-		payload: []byte("Some message 1"),
-	}
-	jobChan <- &Job{
-		payload: []byte("Some message 2"),
-	}
-	jobChan <- &Job{
-		payload: []byte("Some message 3"),
-	}
-	close(jobChan)
-	wg.Wait()
-}
+// 	jobChan <- &Job{
+// 		payload: []byte("Some message 1"),
+// 	}
+// 	jobChan <- &Job{
+// 		payload: []byte("Some message 2"),
+// 	}
+// 	jobChan <- &Job{
+// 		payload: []byte("Some message 3"),
+// 	}
+// 	close(jobChan)
+// 	wg.Wait()
+// }
 
 func (w *Worker) Handle() {
 	defer w.wg.Done()
