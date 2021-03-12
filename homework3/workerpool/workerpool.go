@@ -1,46 +1,90 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"log"
+	"net/http"
 	"sync"
+	"time"
 )
 
+type Results struct{
+	CountBadRequest int64
+	CountRequest int64
+	Mu *sync.RWMutex
+	ArrTimes []time.Duration
+}
+
+var once sync.Once
+var results *Results
+
+func GetResults() *Results {
+
+    once.Do(func() {
+        results = &Results{
+			Mu: &sync.RWMutex{},
+		}
+    })
+    return results
+}
+
+func (rez *Results) getAverageTime() (float64,error){
+	rez.Mu.RLock()
+	var sum float64 
+	for _, val := range rez.ArrTimes {
+		sum += float64(val)
+	}
+	rez.Mu.RUnlock()
+
+	// check 0
+	del:=float64(rez.CountRequest-rez.CountBadRequest)
+	if del == 0 {
+		return 0, errors.New("Dividing by zero")
+	}
+
+	avg:=float64(sum)/del
+	return avg,nil
+}
+
+
 type Job struct {
-	payload []byte
+	request *http.Request
 }
 
 type Worker struct {
 	wg      *sync.WaitGroup
 	num     int // only for example
 	jobChan <-chan *Job
+	
 }
-
-// func main() {
-// 	wg := &sync.WaitGroup{}
-// 	jobChan := make(chan *Job)
-// 	for i := 0; i < 5; i++ {
-// 		worker := NewWorker(i+1, wg, jobChan)
-// 		wg.Add(1)
-// 		go worker.Handle()
-// 	}
-
-// 	jobChan <- &Job{
-// 		payload: []byte("Some message 1"),
-// 	}
-// 	jobChan <- &Job{
-// 		payload: []byte("Some message 2"),
-// 	}
-// 	jobChan <- &Job{
-// 		payload: []byte("Some message 3"),
-// 	}
-// 	close(jobChan)
-// 	wg.Wait()
-// }
 
 func (w *Worker) Handle() {
 	defer w.wg.Done()
 	for job := range w.jobChan {
-		log.Printf("worker %d processing job with payload %s", w.num, string(job.payload))
+
+
+		request := job.request
+		log.Printf("worker %d processing job", w.num, request)
+
+		timeStart := time.Now()
+		resp, err := http.DefaultClient.Do(request)
+		timeDuration := time.Now().Sub(timeStart)
+
+		results.Mu.Lock()
+		results.CountRequest++;
+		if err != nil {
+			results.CountBadRequest++;
+			fmt.Println(err)
+		}
+		results.ArrTimes=append(results.ArrTimes, timeDuration)
+		results.Mu.Unlock()
+		if resp!=nil{
+			resp.Body.Close()
+		}
+		
+		fmt.Println("duration ", timeDuration)
+
 	}
 }
 
