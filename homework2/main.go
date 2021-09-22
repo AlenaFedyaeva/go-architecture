@@ -22,7 +22,7 @@ func main() {
 	flag.Parse()
 
 	fmt.Println(tokenTgStr, smtpStrLog, smtpStrPass,smtpReceiver)
-	tg, err := notification.NewTelegramBot(tokenTgStr, 1077398714)
+	tg, err := notification.NewTelegramBot(tokenTgStr, "*******")
 	if err != nil {
 		log.Fatal(err)
 	}
