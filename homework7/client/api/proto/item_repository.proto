@@ -1,0 +1,88 @@
+syntax="proto3";
+package proto;
+
+service ItemRepository{
+    rpc CreateItem(CreateItemRequest) returns (Item){}
+    rpc ListItems(ListItemsRequest) returns (Item) {}
+    rpc BlockUser(BlockUserRequest) returns (BlockUserResponse) {}
+    
+    rpc UpdateItem(UpdateItemRequest)  returns (Item){}
+	rpc DeleteItem(DeleteItemRequest) returns (Item) {}
+	rpc GetItem(GetItemRequest) returns (Item){}
+	
+	rpc CreateOrder(CreateOrderRequest) returns (Order) {}
+	rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {}
+
+}
+
+message BlockUserRequest{
+    int32 id = 1;
+    string name = 2;
+}
+
+message BlockUserResponse{
+    bool rez=1;
+    string errname = 2;
+}
+
+
+message Item{
+    int32 id = 1;
+    string name = 2;
+    int64 price =3;
+}
+
+message Order{
+    int32 id = 1;
+    string name = 2;
+    string customer_phone=3;
+    string customer_name=4;
+    int64 price =5;
+    repeated int32 item_ids = 6;
+}
+message CreateOrderRequest{
+    string name = 1;
+    string customer_phone=2;
+    string customer_name=3;
+    int64 price =4;
+    repeated int32 item_ids = 5;
+}
+
+message CreateItemRequest{
+    string name = 1;
+    int64  price = 2;
+}
+
+message UpdateItemRequest{
+    int32 id=1;
+    string name = 2;
+    int64  price = 3;
+}
+message DeleteItemRequest{
+    int32 id=1;
+}
+
+message GetItemRequest{
+    int32 id=1;
+}
+
+message ListItemsResponse{
+    repeated Item items = 1;
+}
+
+message ListItemsRequest{
+    int64 price_right = 1;
+    int64 price_left = 2;
+    int32 limit = 3;
+    int32 offset = 4;
+}
+
+message ListOrdersRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message ListOrdersResponse{
+    repeated Order items = 1;
+}
+
